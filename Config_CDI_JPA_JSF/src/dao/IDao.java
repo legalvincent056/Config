@@ -12,4 +12,6 @@ public interface IDao {
 	
 	public void suppClient(Client client);
 	
+	public void maj(Client client);
+	
 }

@@ -13,16 +13,14 @@
 
 	<h:form>
 		<h2>Ajouter un client</h2>
-		<h:messages />
-		<h:panelGrid columns="3" cellpadding="5">
+		<h:messages errorClass="error"/>
+		<h:panelGrid columns="2" cellpadding="5">
 			<h:outputLabel value="Nom" />
-			<h:inputText value="#{clientBean.client.nom}" id="nom"
-				required="true" label="nom" requiredMessage="Le champ nom est null" />
-			<h:message for="nom" errorClass="error" />
+			<h:inputText value="#{clientBean.client.nom}" />
+			
 			<h:outputLabel value="Prénom" />
-			<h:inputText value="#{clientBean.client.prenom}" id="prenom"
-				required="true" label="prenom" />
-			<h:message for="prenom" errorClass="error" />
+			<h:inputText value="#{clientBean.client.prenom}" />
+			
 		</h:panelGrid>
 
 		<h:commandButton type="submit"

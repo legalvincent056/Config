@@ -29,6 +29,13 @@ public class ServiceImpl implements IService {
 		
 	}
 
+	@Override
+	public void maj(Client client) {
+		dao.maj(client);
+		
+	}
+
+	
 	
 	
 	
