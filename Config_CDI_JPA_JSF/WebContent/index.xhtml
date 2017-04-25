@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+	<head>
+		<meta charset="UTF-8"/>
+		<title>Insert title here</title>
+	</head>
+	
+	<body>
+	
+		<h:form>
+		
+			<h:panelGrid columns="2" border="1" width="200" cellpadding="5">
+				<h:outputLabel value="NOM"/>
+				<h:inputText value="#{clientBean.client.nom}"/>
+				
+				<h:outputLabel value="Prénom"/>
+				<h:inputText value="#{clientBean.client.prenom}"/>
+			</h:panelGrid>
+			
+			<h:commandButton type="submit" value="Ajouter" action="#{clientBean.add}"/><br/>
+
+<h2>Liste des clients</h2>
+	<h:dataTable value="#{clientBean.listClient()}" var="leClient" border="1">
+
+		<h:column>
+			<f:facet name="header">Id</f:facet>
+			#{leClient.id}
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">Nom</f:facet>
+			#{leClient.nom}
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">Prenom</f:facet>
+			#{leClient.prenom}
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">Supprimer</f:facet>
+			<h:commandLink  value="Supprimer" update="@form" action="#{mbclient.suppclient}"/>
+				<f:setPropertyActionListener value="#{client}" target="#{clientBean.client}"/>
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">Mettre à jour</f:facet>
+			<h:commandLink  value="Maj"/>
+		</h:column>
+		
+	</h:dataTable>
+						
+		</h:form>
+		
+	</body>
+</html>

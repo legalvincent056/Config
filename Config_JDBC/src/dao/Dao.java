@@ -1,0 +1,42 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import com.mysql.jdbc.Statement;
+
+import metier.Client;
+
+public class Dao implements IDao {
+
+	@Override
+	public long addClient(Client c) {
+		try {
+			// 1- charger le pilote
+			Class.forName("com.mysql.jdbc.Driver");
+			// 2- créer la connexion
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbc", "root", "");
+			// 3- créer la requête
+			PreparedStatement ps = conn.prepareStatement("INSERT INTO Client(nom, prenom) VALUES (?, ?)",
+					Statement.RETURN_GENERATED_KEYS);
+			ps.setString(1, c.getNom());
+			ps.setString(2, c.getPrenom());
+			// 4- executer la requête
+			ps.executeUpdate();
+			// 5- présenter les résultats
+			ResultSet generatedKeys = ps.getGeneratedKeys();
+			if (generatedKeys.next()) {
+				c.setId(generatedKeys.getLong(1));
+			}
+			// 6- fermer la connexion
+			conn.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return c.getId();
+	}
+
+}
